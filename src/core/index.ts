@@ -129,8 +129,7 @@ export default createUnplugin<Partial<Options> | undefined>(
             config.mode !== "production" &&
             options.hot !== false;
         },
-      },
-
+      
       resolveId(id) {
         if (id === runtimePublicPath) {
           return id;
@@ -142,7 +141,7 @@ export default createUnplugin<Partial<Options> | undefined>(
           return runtimeCode;
         }
       },
-
+},
       async transform(source, id) {
         const isSsr = !!options.ssr;
         const currentFileExtension = getExtension(id);

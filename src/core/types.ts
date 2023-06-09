@@ -179,8 +179,6 @@ export interface Options {
    * [babel-plugin-jsx-dom-expressions](https://github.com/ryansolid/dom-expressions/tree/main/packages/babel-plugin-jsx-dom-expressions#plugin-options).
    * They will be merged with the defaults sets by
    * [babel-preset-solid](https://github.com/solidjs/solid/blob/main/packages/babel-preset-solid/index.js#L8-L25).
-   *
-   * @default { }
    */
   solid: {
     /**

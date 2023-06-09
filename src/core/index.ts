@@ -1,3 +1,4 @@
+// Adapted from https://github.com/solidjs/vite-plugin-solid/blob/master/src/index.ts
 import { readFileSync } from "node:fs";
 
 import type { TransformOptions } from "@babel/core";

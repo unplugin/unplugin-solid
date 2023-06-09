@@ -1,16 +1,16 @@
 // Adapted from https://github.com/solidjs/vite-plugin-solid/blob/master/src/index.ts
 import { readFileSync } from "node:fs";
 
+import { createFilter } from "@rollup/pluginutils";
 import type { TransformOptions } from "@babel/core";
 import { transformAsync } from "@babel/core";
 // @ts-expect-error
+import ts from "@babel/preset-typescript";
+// @ts-expect-error
 import solid from "babel-preset-solid";
 import { mergeAndConcat } from "merge-anything";
-// @ts-expect-error
-import ts from "@babel/preset-typescript";
-import { createUnplugin } from "unplugin";
 import solidRefresh from "solid-refresh/babel";
-import { createFilter } from "@rollup/pluginutils";
+import { createUnplugin } from "unplugin";
 import type { UserConfig } from "vite";
 import { crawlFrameworkPkgs } from "vitefu";
 

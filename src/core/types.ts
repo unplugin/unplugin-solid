@@ -236,8 +236,6 @@ export interface Options {
      * Array of Component exports from module, that aren't included by default
      * with the library. This plugin will automatically import them if it comes
      * across them in the JSX.
-     *
-     * @default [
      */
     builtIns?: string[];
   };

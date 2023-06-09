@@ -117,5 +117,8 @@
     "vite": "^4.3.5",
     "vitest": "^0.32.0",
     "webpack": "^5.82.0"
-  }
-}
+  },
+  
+  "peerDependencies": {
+    "solid-js": "^1.7.2"
+  }}

@@ -1,11 +1,11 @@
 // Adapted from https://github.com/solidjs/vite-plugin-solid/blob/master/src/index.ts
 import { readFileSync } from "node:fs";
 
-import { createFilter } from "@rollup/pluginutils";
 import type { TransformOptions } from "@babel/core";
 import { transformAsync } from "@babel/core";
 // @ts-expect-error
 import ts from "@babel/preset-typescript";
+import { createFilter } from "@rollup/pluginutils";
 // @ts-expect-error
 import solid from "babel-preset-solid";
 import { mergeAndConcat } from "merge-anything";

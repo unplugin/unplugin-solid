@@ -1,6 +1,5 @@
-import type { Options } from "./types";
-
 import unplugin from ".";
+import type { Options } from "./types";
 
 export default (options: Options) => ({
   name: "unplugin-solid",

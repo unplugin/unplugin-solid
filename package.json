@@ -1,7 +1,7 @@
 {
   "name": "unplugin-solid",
   "version": "0.1.0",
-  "packageManager": "pnpm@8.6.5",
+  "packageManager": "pnpm@8.6.6",
   "author": "Ray <i@mk1.io> (@so1ve)",
   "description": "",
   "keywords": [

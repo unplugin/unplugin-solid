@@ -12,13 +12,13 @@
     "rollup",
     "transform"
   ],
-  "homepage": "https://github.com/so1ve/unplugin-solid#readme",
+  "homepage": "https://github.com/unplugin/unplugin-solid#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/so1ve/unplugin-solid.git"
+    "url": "git+https://github.com/unplugin/unplugin-solid.git"
   },
   "bugs": {
-    "url": "https://github.com/so1ve/unplugin-solid/issues"
+    "url": "https://github.com/unplugin/unplugin-solid/issues"
   },
   "license": "MIT",
   "sideEffects": false,

@@ -28,7 +28,7 @@ dependencies:
     version: 0.5.3(solid-js@1.8.15)
   unplugin:
     specifier: ^1.3.1
-    version: 1.8.3
+    version: 1.9.0
   vitefu:
     specifier: ^0.2.3
     version: 0.2.5(vite@4.5.2)
@@ -6476,8 +6476,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin@1.8.3:
-    resolution: {integrity: sha512-ZlLteXGDcyJgsbN2g4sZ3Dw6fpX1O5rjgeaA5MmQhhA2YxnTxsh43f8nDQgFOzcir0iv8GYMjtCV8MtyNnrhEg==}
+  /unplugin@1.9.0:
+    resolution: {integrity: sha512-14PslvMY3gNbXnQtNIRB566Q057L5Fe7f5LDEamxVi0QQVxoz5hrveBwwZLcKyHtZ09ysmipxRRj5Lv+BGz2Iw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       acorn: 8.11.3

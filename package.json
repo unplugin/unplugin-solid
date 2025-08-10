@@ -103,7 +103,7 @@
     "vitefu": "^0.2.3"
   },
   "devDependencies": {
-    "@antfu/ni": "^0.21.3",
+    "@antfu/ni": "^0.23.0",
     "@so1ve/eslint-config": "^0.102.0",
     "@types/babel__core": "^7.1.20",
     "@types/node": "^18.16.6",

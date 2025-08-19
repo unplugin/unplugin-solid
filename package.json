@@ -114,7 +114,7 @@
     "typescript": "^5.0.4",
     "unbuild": "^1.2.1",
     "vite": "^4.3.5",
-    "vitest": "^0.32.0",
+    "vitest": "^0.34.0",
     "webpack": "^5.82.0"
   },
   "peerDependencies": {

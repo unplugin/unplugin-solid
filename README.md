@@ -5,9 +5,13 @@
 ## 📦 Installation
 
 ```bash
-$ npm install -D unplugin-solid
-$ yarn add -D unplugin-solid
-$ pnpm add -D unplugin-solid
+npm install -D unplugin-solid
+```
+```bash
+yarn add -D unplugin-solid
+```
+```bash
+pnpm add -D unplugin-solid
 ```
 
 ## 🚀 Usage
@@ -36,6 +40,25 @@ export default defineConfig({
 ```ts
 // rollup.config.js
 import Solid from "unplugin-solid/rollup";
+
+export default {
+  plugins: [
+    Solid({
+      /* options */
+    }),
+    // other plugins
+  ],
+};
+```
+
+<br></details>
+
+<details>
+<summary>Rolldown</summary><br>
+
+```ts
+// rolldown.config.js
+import Solid from "unplugin-solid/rolldown";
 
 export default {
   plugins: [

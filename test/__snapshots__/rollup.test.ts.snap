@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`rollup > test/fixtures/basic.tsx > dev = false 1`] = `
+"// basic.js
+import { template } from 'solid-js/web';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+const Foo = _tmpl$();
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/basic.tsx > dev = true 1`] = `
+"// basic.js
+import { template } from 'solid-js/web';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+const Foo = _tmpl$();
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/syntax.tsx > dev = false 1`] = `
+"// syntax.js
+import { template, createComponent, delegateEvents } from 'solid-js/web';
+import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+function Foo(props) {
+	const [count, setCount] = createSignal(0);
+	onMount(() => {
+		console.log("mounted");
+		onCleanup(() => {
+			console.log("unmounted");
+		});
+	});
+	createEffect(() => {
+		console.log("count:", count());
+	});
+	return [
+		"Children:",
+		createComponent(Suspense, {
+			fallback: "loading...",
+			get children() {
+				return props.children;
+			}
+		}),
+		(() => {
+			var _el$ = _tmpl$();
+			_el$.$$click = () => setCount(count() + 1);
+			return _el$;
+		})()
+	];
+}
+delegateEvents(["click"]);
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/syntax.tsx > dev = true 1`] = `
+"// syntax.js
+import { template, createComponent, delegateEvents } from 'solid-js/web';
+import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+function Foo(props) {
+	const [count, setCount] = createSignal(0);
+	onMount(() => {
+		console.log("mounted");
+		onCleanup(() => {
+			console.log("unmounted");
+		});
+	});
+	createEffect(() => {
+		console.log("count:", count());
+	});
+	return [
+		"Children:",
+		createComponent(Suspense, {
+			fallback: "loading...",
+			get children() {
+				return props.children;
+			}
+		}),
+		(() => {
+			var _el$ = _tmpl$();
+			_el$.$$click = () => setCount(count() + 1);
+			return _el$;
+		})()
+	];
+}
+delegateEvents(["click"]);
+
+export { Foo as default };
+"
+`;

@@ -3,235 +3,286 @@ import { readFileSync } from "node:fs";
 
 import type { TransformOptions } from "@babel/core";
 import { transformAsync } from "@babel/core";
-// @ts-expect-error
-import ts from "@babel/preset-typescript";
 import { createFilter } from "@rollup/pluginutils";
 // @ts-expect-error
 import solid from "babel-preset-solid";
 import { mergeAndConcat } from "merge-anything";
 import solidRefresh from "solid-refresh/babel";
+import type { UnpluginInstance } from "unplugin";
 import { createUnplugin } from "unplugin";
-import type { UserConfig } from "vite";
+import { version } from "vite";
 import { crawlFrameworkPkgs } from "vitefu";
 
 import type { Options } from "./types";
 import {
-  containsSolidField,
-  getExtension,
-  isJestDomInstalled,
-  normalizeAliases,
+	containsSolidField,
+	getExtension,
+	getJestDomExport,
+	normalizeAliases,
+	require,
 } from "./utils";
 
 const runtimePublicPath = "/@solid-refresh";
 const runtimeFilePath = require.resolve("solid-refresh/dist/solid-refresh.mjs");
 const runtimeCode = readFileSync(runtimeFilePath, "utf-8");
 
-export default createUnplugin<Partial<Options> | undefined>(
-  (options = {}, meta) => {
-    const filter = createFilter(options.include, options.exclude);
+const SOLID_EXTERNALS = [
+	"solid-js",
+	"solid-js/web",
+	"solid-js/store",
+	"solid-js/html",
+	"solid-js/h",
+];
 
-    const isVite = meta.framework === "vite";
-    let needHmr = false;
-    let replaceDev = false;
-    let projectRoot = process.cwd();
+export const plugin: UnpluginInstance<Options | undefined, false> =
+	createUnplugin((options = {}, meta) => {
+		const filter = createFilter(options.include, options.exclude);
 
-    return {
-      name: "unplugin-solid",
-      enforce: "pre",
+		let needHmr = false;
+		let replaceDev = false;
+		let projectRoot: string | undefined = process.cwd();
+		let isTestMode = false;
 
-      vite: {
-        async config(userConfig, { command }) {
-          // We inject the dev mode only if the user explicitely wants it or if we are in dev (serve) mode
-          replaceDev =
-            options.dev === true ||
-            (options.dev !== false && command === "serve");
-          projectRoot = userConfig.root ?? projectRoot;
+		return {
+			name: "unplugin-solid",
+			enforce: "pre",
 
-          if (!userConfig.resolve) {
-            userConfig.resolve = {};
-          }
-          userConfig.resolve.alias = normalizeAliases(userConfig.resolve.alias);
+			vite: {
+				async config(userConfig, { command }) {
+					// We inject the dev mode only if the user explicitly wants it or if we are in dev (serve) mode
+					replaceDev =
+						options.dev === true ||
+						(options.dev !== false && command === "serve");
+					projectRoot = userConfig.root;
+					isTestMode = userConfig.mode === "test";
 
-          const solidPkgsConfig = await crawlFrameworkPkgs({
-            viteUserConfig: userConfig,
-            root: projectRoot || process.cwd(),
-            isBuild: command === "build",
-            isFrameworkPkgByJson(pkgJson) {
-              return containsSolidField(pkgJson.exports || {});
-            },
-          });
+					userConfig.resolve ??= {};
+					userConfig.resolve.alias = normalizeAliases(
+						userConfig.resolve && userConfig.resolve.alias,
+					);
 
-          // fix for bundling dev in production
-          const nestedDeps = replaceDev
-            ? [
-                "solid-js",
-                "solid-js/web",
-                "solid-js/store",
-                "solid-js/html",
-                "solid-js/h",
-              ]
-            : [];
+					const solidPkgsConfig = await crawlFrameworkPkgs({
+						viteUserConfig: userConfig,
+						root: projectRoot ?? process.cwd(),
+						isBuild: command === "build",
+						isFrameworkPkgByJson(pkgJson) {
+							return containsSolidField(pkgJson.exports ?? {});
+						},
+					});
 
-          const test =
-            userConfig.mode === "test"
-              ? {
-                  test: {
-                    globals: true,
-                    ...(options.ssr ? {} : { environment: "jsdom" }),
-                    transformMode: {
-                      [options.ssr ? "ssr" : "web"]: [/\.[jt]sx?$/],
-                    },
-                    ...(isJestDomInstalled()
-                      ? {
-                          setupFiles: [
-                            "node_modules/@testing-library/jest-dom/extend-expect.js",
-                          ],
-                        }
-                      : {}),
-                    deps: { registerNodeLoader: true },
-                    ...(
-                      userConfig as UserConfig & { test: Record<string, any> }
-                    ).test,
-                  },
-                }
-              : {};
+					// fix for bundling dev in production
+					const nestedDeps = replaceDev ? SOLID_EXTERNALS : [];
 
-          return {
-            /**
-             * We only need esbuild on .ts or .js files. .tsx & .jsx files are
-             * handled by us
-             */
-            esbuild: { include: /\.ts$/ },
-            resolve: {
-              conditions: [
-                "solid",
-                ...(isVite && replaceDev ? ["development"] : []),
-                ...(userConfig.mode === "test" && !options.ssr
-                  ? ["browser"]
-                  : []),
-              ],
-              dedupe: nestedDeps,
-              alias: [
-                { find: /^solid-refresh$/, replacement: runtimePublicPath },
-              ],
-            },
-            optimizeDeps: {
-              include: [...nestedDeps, ...solidPkgsConfig.optimizeDeps.include],
-              exclude: solidPkgsConfig.optimizeDeps.exclude,
-            },
-            ssr: solidPkgsConfig.ssr,
-            ...test,
-          };
-        },
+					const userTest = (userConfig as any).test ?? {};
+					const test = {} as any;
+					if (userConfig.mode === "test") {
+						// to simplify the processing of the config, we normalize the setupFiles to an array
+						const userSetupFiles: string[] =
+							typeof userTest.setupFiles === "string"
+								? [userTest.setupFiles]
+								: (userTest.setupFiles ?? []);
 
-        configResolved(config) {
-          needHmr =
-            config.command === "serve" &&
-            config.mode !== "production" &&
-            options.hot !== false;
-        },
+						if (!userTest.environment && !options.ssr) {
+							test.environment = "jsdom";
+						}
 
-        resolveId(id) {
-          if (id === runtimePublicPath) {
-            return id;
-          }
-        },
+						if (
+							!userTest.server?.deps?.external?.find((item: string | RegExp) =>
+								/solid-js/.test(item.toString()),
+							)
+						) {
+							test.server = { deps: { external: [/solid-js/] } };
+						}
+						if (!userTest.browser?.enabled) {
+							// vitest browser mode already has bundled jest-dom assertions
+							// https://main.vitest.dev/guide/browser/assertion-api.html#assertion-api
+							const jestDomImport = getJestDomExport(userSetupFiles);
+							if (jestDomImport) {
+								test.setupFiles = [jestDomImport];
+							}
+						}
+					}
 
-        load(id) {
-          if (id === runtimePublicPath) {
-            return runtimeCode;
-          }
-        },
-      },
-      async transform(source, id) {
-        const isSsr = !!options.ssr;
-        const currentFileExtension = getExtension(id);
+					const isViteGreaterThan6 = +version.split(".")[0] >= 6;
 
-        const extensionsToWatch = [
-          ...(options.extensions ?? []),
-          ".tsx",
-          ".jsx",
-        ];
-        const allExtensions = extensionsToWatch.map((extension) =>
-          // An extension can be a string or a tuple [extension, options]
-          typeof extension === "string" ? extension : extension[0],
-        );
+					return {
+						/**
+						 * We only need esbuild on .ts or .js files.
+						 * .tsx & .jsx files are handled by us
+						 */
+						// esbuild: { include: /\.ts$/ },
+						resolve: {
+							conditions: isViteGreaterThan6
+								? undefined
+								: [
+										"solid",
+										...(replaceDev ? ["development"] : []),
+										...(userConfig.mode === "test" && !options.ssr
+											? ["browser"]
+											: []),
+									],
+							dedupe: nestedDeps,
+							alias: [
+								{ find: /^solid-refresh$/, replacement: runtimePublicPath },
+							],
+						},
+						optimizeDeps: {
+							include: [...nestedDeps, ...solidPkgsConfig.optimizeDeps.include],
+							exclude: solidPkgsConfig.optimizeDeps.exclude,
+						},
+						ssr: solidPkgsConfig.ssr,
+						...(test.server ? { test } : {}),
+					};
+				},
 
-        if (!filter(id) || !allExtensions.includes(currentFileExtension)) {
-          return null;
-        }
+				async configEnvironment(name, config, opts) {
+					config.resolve ??= {};
+					// Emulate Vite default fallback for `resolve.conditions` if not set
+					if (config.resolve.conditions == null) {
+						const { defaultClientConditions, defaultServerConditions } =
+							await import("vite");
+						config.resolve.conditions =
+							config.consumer === "client" ||
+							name === "client" ||
+							opts.isSsrTargetWebworker
+								? [...defaultClientConditions]
+								: [...defaultServerConditions];
+					}
+					config.resolve.conditions = [
+						"solid",
+						...(replaceDev ? ["development"] : []),
+						...(isTestMode && !opts.isSsrTargetWebworker ? ["browser"] : []),
+						...config.resolve.conditions,
+					];
+				},
 
-        const inNodeModules = /node_modules/.test(id);
+				configResolved(config) {
+					needHmr =
+						config.command === "serve" &&
+						config.mode !== "production" &&
+						options.hot !== false;
+				},
 
-        let solidOptions: { generate: "ssr" | "dom"; hydratable: boolean };
+				resolveId(id) {
+					if (id === runtimePublicPath) {
+						return id;
+					}
+				},
 
-        if (options.ssr) {
-          solidOptions = isSsr
-            ? { generate: "ssr", hydratable: true }
-            : { generate: "dom", hydratable: true };
-        } else {
-          solidOptions = { generate: "dom", hydratable: false };
-        }
+				load(id) {
+					if (id === runtimePublicPath) {
+						return runtimeCode;
+					}
+				},
+			},
 
-        id = id.replace(/\?.+$/, "");
+			rolldown: {
+				options(opts) {
+					opts.external ??= SOLID_EXTERNALS;
+					opts.transform ??= {
+						jsx: "preserve",
+					};
+				},
+			},
 
-        const opts: TransformOptions = {
-          babelrc: false,
-          configFile: false,
-          root: projectRoot,
-          filename: id,
-          sourceFileName: id,
-          presets: [[solid, { ...solidOptions, ...(options.solid ?? {}) }]],
-          plugins:
-            isVite && needHmr && !isSsr && !inNodeModules
-              ? [[solidRefresh, { bundler: "vite" }]]
-              : [],
-          sourceMaps: true,
-          // Vite handles sourcemap flattening
-          inputSourceMap: false as any,
-        };
+			async transform(source, id) {
+				const isSsr = !!options.ssr;
+				const currentFileExtension = getExtension(id);
 
-        // We need to know if the current file extension has a typescript options tied to it
-        const shouldBeProcessedWithTypescript = extensionsToWatch.some(
-          (extension) => {
-            if (typeof extension === "string") {
-              return extension.includes("tsx");
-            }
+				const extensionsToWatch = options.extensions ?? [];
+				const allExtensions = extensionsToWatch.map((extension) =>
+					// An extension can be a string or a tuple [extension, options]
+					typeof extension === "string" ? extension : extension[0],
+				);
 
-            const [extensionName, extensionOptions] = extension;
-            if (extensionName !== currentFileExtension) {
-              return false;
-            }
+				if (!filter(id)) {
+					return null;
+				}
 
-            return extensionOptions.typescript;
-          },
-        );
+				id = id.replace(/\?.*$/, "");
 
-        if (shouldBeProcessedWithTypescript) {
-          (opts.presets ??= []).push([ts, options.typescript ?? {}]);
-        }
+				if (
+					!(
+						/\.[mc]?[tj]sx$/i.test(id) ||
+						allExtensions.includes(currentFileExtension)
+					)
+				) {
+					return null;
+				}
 
-        // Default value for babel user options
-        let babelUserOptions: TransformOptions = {};
+				const inNodeModules = /node_modules/.test(id);
 
-        if (options.babel) {
-          if (typeof options.babel === "function") {
-            const babelOptions = options.babel(source, id, isSsr);
-            babelUserOptions =
-              babelOptions instanceof Promise
-                ? await babelOptions
-                : babelOptions;
-          } else {
-            babelUserOptions = options.babel;
-          }
-        }
+				let solidOptions: { generate: "ssr" | "dom"; hydratable: boolean };
 
-        const babelOptions = mergeAndConcat(babelUserOptions, opts);
+				if (options.ssr) {
+					solidOptions = isSsr
+						? { generate: "ssr", hydratable: true }
+						: { generate: "dom", hydratable: true };
+				} else {
+					solidOptions = { generate: "dom", hydratable: false };
+				}
 
-        const { code, map } = (await transformAsync(source, babelOptions))!;
+				// We need to know if the current file extension has a typescript options tied to it
+				const shouldBeProcessedWithTypescript =
+					/\.[mc]?tsx$/i.test(id) ||
+					extensionsToWatch.some((extension) => {
+						if (typeof extension === "string") {
+							return extension.includes("tsx");
+						}
 
-        return { code: code!, map };
-      },
-    };
-  },
-);
+						const [extensionName, extensionOptions] = extension;
+						if (extensionName !== currentFileExtension) {
+							return false;
+						}
+
+						return extensionOptions.typescript;
+					});
+				const plugins: NonNullable<
+					NonNullable<TransformOptions["parserOpts"]>["plugins"]
+				> = ["jsx"];
+
+				if (shouldBeProcessedWithTypescript) {
+					plugins.push("typescript");
+				}
+
+				const opts: TransformOptions = {
+					root: projectRoot,
+					filename: id,
+					sourceFileName: id,
+					presets: [[solid, { ...solidOptions, ...(options.solid ?? {}) }]],
+					plugins:
+						needHmr && !isSsr && !inNodeModules
+							? [[solidRefresh, { bundler: meta.framework }]]
+							: [],
+					ast: false,
+					sourceMaps: true,
+					configFile: false,
+					babelrc: false,
+					parserOpts: {
+						plugins,
+					},
+				};
+
+				// Default value for babel user options
+				let babelUserOptions: TransformOptions = {};
+
+				if (options.babel) {
+					if (typeof options.babel === "function") {
+						const babelOptions = options.babel(source, id, isSsr);
+						babelUserOptions =
+							babelOptions instanceof Promise
+								? await babelOptions
+								: babelOptions;
+					} else {
+						babelUserOptions = options.babel;
+					}
+				}
+
+				const babelOptions = mergeAndConcat(babelUserOptions, opts);
+
+				const { code, map } = (await transformAsync(source, babelOptions))!;
+
+				return { code: code!, map };
+			},
+		};
+	});

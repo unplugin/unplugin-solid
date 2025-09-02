@@ -20,11 +20,11 @@ $ pnpm add -D unplugin-solid
 import Solid from "unplugin-solid/vite";
 
 export default defineConfig({
-  plugins: [
-    Solid({
-      /* options */
-    }),
-  ],
+	plugins: [
+		Solid({
+			/* options */
+		}),
+	],
 });
 ```
 
@@ -38,17 +38,35 @@ export default defineConfig({
 import Solid from "unplugin-solid/rollup";
 
 export default {
-  plugins: [
-    Solid({
-      /* options */
-    }),
-    // other plugins
-  ],
+	plugins: [
+		Solid({
+			/* options */
+		}),
+		// other plugins
+	],
 };
 ```
 
 <br></details>
 
+<details>
+<summary>Rolldown</summary><br>
+
+```ts
+// rolldown.config.js
+import Solid from "unplugin-solid/rolldown";
+
+export default {
+	plugins: [
+		Solid({
+			/* options */
+		}),
+		// other plugins
+	],
+};
+```
+
+<br></details>
 
 <details>
 <summary>Webpack</summary><br>
@@ -56,12 +74,12 @@ export default {
 ```ts
 // webpack.config.js
 module.exports = {
-  /* ... */
-  plugins: [
-    require("unplugin-solid/webpack")({
-      /* options */
-    }),
-  ],
+	/* ... */
+	plugins: [
+		require("unplugin-solid/webpack")({
+			/* options */
+		}),
+	],
 };
 ```
 
@@ -75,17 +93,16 @@ module.exports = {
 import { build } from "esbuild";
 
 build({
-  /* ... */
-  plugins: [
-    require("unplugin-solid/esbuild")({
-      /* options */
-    }),
-  ],
+	/* ... */
+	plugins: [
+		require("unplugin-solid/esbuild")({
+			/* options */
+		}),
+	],
 });
 ```
 
 <br></details>
-
 
 <details>
 <summary>Astro</summary><br>
@@ -95,11 +112,11 @@ build({
 import Solid from "unplugin-solid/astro";
 
 export default defineConfig({
-  integrations: [
-    Solid({
-      /* options */
-    }),
-  ],
+	integrations: [
+		Solid({
+			/* options */
+		}),
+	],
 });
 ```
 

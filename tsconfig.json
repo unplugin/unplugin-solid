@@ -1,14 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "ESNext",
-    "lib": ["ESNext"],
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
+    "target": "esnext",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "lib": ["es2022"],
+    "moduleDetection": "force",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node"],
     "strict": true,
     "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true
-  }
+    "noUnusedLocals": true,
+    "declaration": true,
+    "isolatedDeclarations": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "test", "tsdown.config.ts"],
+  "exclude": ["**/fixtures"]
 }

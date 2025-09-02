@@ -5,7 +5,7 @@
 ## 📦 Installation
 
 ```bash
-$ npm install -D unplugin-solid	npm install -D unplugin-solid
+$ npm install -D unplugin-solid
 $ yarn add -D unplugin-solid
 $ pnpm add -D unplugin-solid
 ```

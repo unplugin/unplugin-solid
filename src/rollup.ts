@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Rollup plugin
@@ -19,6 +19,6 @@ import unplugin from '.'
  * }
  * ```
  */
-const rollup: typeof unplugin.rollup = unplugin.rollup
-export default rollup
-export { rollup as 'module.exports' }
+const rollup: typeof unplugin.rollup = unplugin.rollup;
+export default rollup;
+export { rollup as "module.exports" };

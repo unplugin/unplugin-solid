@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Rspack plugin
@@ -19,6 +19,6 @@ import unplugin from '.'
  * }
  * ```
  */
-const rspack: typeof unplugin.rspack = unplugin.rspack
-export default rspack
-export { rspack as 'module.exports' }
+const rspack: typeof unplugin.rspack = unplugin.rspack;
+export default rspack;
+export { rspack as "module.exports" };

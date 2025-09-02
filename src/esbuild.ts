@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Esbuild plugin
@@ -17,6 +17,6 @@ import unplugin from '.'
  * build({ plugins: [Solid()] })
  ```
  */
-const esbuild: typeof unplugin.esbuild = unplugin.esbuild
-export default esbuild
-export { esbuild as 'module.exports' }
+const esbuild: typeof unplugin.esbuild = unplugin.esbuild;
+export default esbuild;
+export { esbuild as "module.exports" };

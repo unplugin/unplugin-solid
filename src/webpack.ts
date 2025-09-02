@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Webpack plugin
@@ -19,6 +19,6 @@ import unplugin from '.'
  * }
  * ```
  */
-const webpack: typeof unplugin.webpack = unplugin.webpack
-export default webpack
-export { webpack as 'module.exports' }
+const webpack: typeof unplugin.webpack = unplugin.webpack;
+export default webpack;
+export { webpack as "module.exports" };

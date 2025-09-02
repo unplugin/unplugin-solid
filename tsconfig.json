@@ -20,6 +20,6 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "tsdown.config.ts"],
   "exclude": ["**/fixtures"]
 }

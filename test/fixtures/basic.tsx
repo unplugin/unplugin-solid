@@ -1,5 +1,5 @@
-import type { JSX } from 'solid-js'
+import type { JSX } from "solid-js";
 
-const Foo: JSX.Element = <div>Hello World</div>
+const Foo: JSX.Element = <div>Hello World</div>;
 
-export default Foo
+export default Foo;

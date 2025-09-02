@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Vite plugin
@@ -19,6 +19,6 @@ import unplugin from '.'
  * })
  * ```
  */
-const vite: typeof unplugin.vite = unplugin.vite
-export default vite
-export { vite as 'module.exports' }
+const vite: typeof unplugin.vite = unplugin.vite;
+export default vite;
+export { vite as "module.exports" };

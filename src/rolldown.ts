@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from '.'
+import unplugin from ".";
 
 /**
  * Rolldown plugin
@@ -19,6 +19,6 @@ import unplugin from '.'
  * }
  * ```
  */
-const rolldown: typeof unplugin.rolldown = unplugin.rolldown
-export default rolldown
-export { rolldown as 'module.exports' }
+const rolldown: typeof unplugin.rolldown = unplugin.rolldown;
+export default rolldown;
+export { rolldown as "module.exports" };

@@ -85,7 +85,7 @@
 		"@sxzz/test-utils": "^0.5.10",
 		"@types/babel__core": "^7.20.5",
 		"@types/node": "^24.3.0",
-		"@typescript/native-preview": "7.0.0-dev.20250903.1",
+		"@typescript/native-preview": "7.0.0-dev.20250904.1",
 		"bumpp": "^10.2.3",
 		"esbuild": "^0.25.9",
 		"eslint": "^9.34.0",

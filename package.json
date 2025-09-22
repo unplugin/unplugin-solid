@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-solid",
 	"version": "1.0.0",
-	"packageManager": "pnpm@10.17.0",
+	"packageManager": "pnpm@10.17.1",
 	"author": "Ray <i@mk1.io> (@so1ve)",
 	"type": "module",
 	"description": "Transform Solid.js code in various bundlers powered by unplugin",

@@ -1,7 +1,7 @@
 {
 	"name": "unplugin-solid",
 	"version": "1.0.0",
-	"packageManager": "pnpm@10.17.1",
+	"packageManager": "pnpm@10.18.0",
 	"author": "Ray <i@mk1.io> (@so1ve)",
 	"type": "module",
 	"description": "Transform Solid.js code in various bundlers powered by unplugin",
@@ -85,7 +85,7 @@
 		"@sxzz/test-utils": "^0.5.10",
 		"@types/babel__core": "^7.20.5",
 		"@types/node": "^24.3.0",
-		"@typescript/native-preview": "7.0.0-dev.20251001.1",
+		"@typescript/native-preview": "7.0.0-dev.20251002.1",
 		"bumpp": "^10.2.3",
 		"esbuild": "^0.25.9",
 		"eslint": "^9.34.0",

@@ -28,29 +28,29 @@ importers:
         version: 2.3.10
       vitefu:
         specifier: ^1.1.1
-        version: 1.1.1(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+        version: 1.1.1(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
     devDependencies:
       '@antfu/ni':
         specifier: ^25.0.0
         version: 25.0.0
       '@so1ve/eslint-config':
         specifier: ^3.9.0
-        version: 3.10.0(@typescript-eslint/eslint-plugin@8.46.1(@typescript-eslint/parser@8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))(jiti@2.6.1)(prettier@3.6.2)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+        version: 3.10.0(@typescript-eslint/eslint-plugin@8.46.1(@typescript-eslint/parser@8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))(jiti@2.6.1)(prettier@3.6.2)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       '@so1ve/prettier-config':
         specifier: ^3.9.0
         version: 3.10.0(prettier@3.6.2)
       '@sxzz/test-utils':
         specifier: ^0.5.10
-        version: 0.5.11(esbuild@0.25.10)(rolldown@1.0.0-beta.43)(rollup@4.52.4)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+        version: 0.5.11(esbuild@0.25.10)(rolldown@1.0.0-beta.43)(rollup@4.52.4)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/node':
         specifier: ^24.3.0
-        version: 24.7.2
+        version: 24.8.0
       '@typescript/native-preview':
-        specifier: 7.0.0-dev.20251015.1
-        version: 7.0.0-dev.20251015.1
+        specifier: 7.0.0-dev.20251016.1
+        version: 7.0.0-dev.20251016.1
       bumpp:
         specifier: ^10.2.3
         version: 10.3.1
@@ -71,7 +71,7 @@ importers:
         version: 1.9.9
       tsdown:
         specifier: ^0.14.2
-        version: 0.14.2(@typescript/native-preview@7.0.0-dev.20251015.1)(oxc-resolver@11.9.0)(typescript@5.9.3)
+        version: 0.14.2(@typescript/native-preview@7.0.0-dev.20251016.1)(oxc-resolver@11.9.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.2
         version: 5.9.3
@@ -80,13 +80,13 @@ importers:
         version: 0.5.3
       vite:
         specifier: ^7.1.3
-        version: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+        version: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
       vite-plugin-solid:
         specifier: ^2.11.8
-        version: 2.11.9(solid-js@1.9.9)(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+        version: 2.11.9(solid-js@1.9.9)(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
       webpack:
         specifier: ^5.82.0
         version: 5.102.1(esbuild@0.25.10)
@@ -1118,8 +1118,8 @@ packages:
   '@types/node@22.18.10':
     resolution: {integrity: sha512-anNG/V/Efn/YZY4pRzbACnKxNKoBng2VTFydVu8RRs5hQjikP8CQfaeAV59VFSCzKNp90mXiVXW2QzV56rwMrg==}
 
-  '@types/node@24.7.2':
-    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
+  '@types/node@24.8.0':
+    resolution: {integrity: sha512-5x08bUtU8hfboMTrJ7mEO4CpepS9yBwAqcL52y86SWNmbPX8LVbNs3EP4cNrIZgdjk2NAlP2ahNihozpoZIxSg==}
 
   '@types/parse-author@2.0.3':
     resolution: {integrity: sha512-pgRW2K/GVQoogylrGJXDl7PBLW9A6T4OOc9Hy9MLT5f7vgufK2GQ8FcfAbjFHR5HjcN9ByzuCczAORk49REqoA==}
@@ -1210,43 +1210,43 @@ packages:
     resolution: {integrity: sha512-ptkmIf2iDkNUjdeu2bQqhFPV1m6qTnFFjg7PPDjxKWaMaP0Z6I9l30Jr3g5QqbZGdw8YdYvLp+XnqnWWZOg/NA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-nX3IvW3zVZItG6BWkSmQlyNiq23obmSU+S+Yp0bN6elR+S+yLWssutb1f8mmjOVx8zZVIB0PHuzeiTb3a89aEA==}
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-TBSMWAhEaHGMwDRYxY5Lpjgr0JMdtdYEr/ha1pdvAP7g+D23EnKNsIpf2bv2FoBkWb5gsh33tT6GcZV0N2bICg==}
     cpu: [arm64]
     os: [darwin]
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-cqqqChfieGbtuDbWSDZKjMz/SDlt2B0XY1rdGS3HNzHocpxYHg5cKQGGddQxwSQp/OdeRpkpEzfvRsbpWnv/ig==}
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-NRoRafU+2T0PvfpXjxSb99tw1Qu+KrWTiq5i8AdTjGNU2nvD7yB5YeXzEn5L1vylATpxs8oxKbJ5WSHFAZkvXw==}
     cpu: [x64]
     os: [darwin]
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-iL6uD3P4NtBslegrtxPRcobbg+PkKnck+AD7lLT/KGfNXy0vB5touFdNhWY+FoaahSTyAYuS6Fo2F/FzdzzLkw==}
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-GCwepKA//bh1BX/VDk5Wzo8NQTe4NHcATSQyNqJo+cO1xKEYC4kZFf+0gmjUIo7QnwoHDVlK7tissY3FYIIx2Q==}
     cpu: [arm64]
     os: [linux]
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-T1utGfiJ4auwPF+aOXGtJauEvyCMCSd2reGsv0P9vnE5YeJheopZ6VTtmvYkN9IsIHBvX+BLbOv4Gr3zubAY+w==}
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-4A4q5LUXUluG1vNaU6QqbflPPXxqcMYMMJstgvpz0SJ+pEKzFOeZXYhW254Qdliho6obqB0FHG9IlnQNAvorFw==}
     cpu: [arm]
     os: [linux]
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-xGE8apymvrvMrV9Vt3t8nqD/xcoiC/gCgbxrFr9xM7WkoCre7ZMUbTsiSwORpgj8ELKszgGsAaNwZY6RcI2sLA==}
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-qmeugyy+02ipEBWevwJrlg6lpIhrziUF5dT0LZp4Qr4moojX/yZIPAelaWzgfe092NOgbTw2bFSzaJk1KK0s6g==}
     cpu: [x64]
     os: [linux]
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-QxIR7d/xLLYTLXa7UMtxb/m0jB18UNK1FhHiHFUy6udjrVlfPmcXOIv4TUZxHGFx00I2QWNzySWd5DQOs8jllQ==}
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-7FwP4aMgHx1hcZtFT5WGyyjTliDj2jF2cG1gQcBX+GR2d+DcRUoF41E7WtaPBkBfrfrgjYdxgpliCmDLF4WHMg==}
     cpu: [arm64]
     os: [win32]
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-vir9fC7vfpPP3xWgHZnK/GPqCwFRUCCOw8sKtXgGVf1EQcKo/H+pzCMlRTGdmHoGRBEI7eSyTn0fnQcKcnMymg==}
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-Q9FeuI8pPmCmpONwc0/mClxHZCzQVvDYbD21lZKoT/yILvtEwRL4HD5VnlTve7fzjhXCkj9R+8I+Nk+Y33n9ug==}
     cpu: [x64]
     os: [win32]
 
-  '@typescript/native-preview@7.0.0-dev.20251015.1':
-    resolution: {integrity: sha512-QNNVpnjvJJ5yVZf2v4vHT/fK2mAzE5VC5m4mYI+aboT0Dlt4ZgPkYs/CodG+NIsGce8fkEs7hZNk8W4RFf7biw==}
+  '@typescript/native-preview@7.0.0-dev.20251016.1':
+    resolution: {integrity: sha512-OMnnupqcqdcbf4lryAKyIDWNJHc1dP13OcKmV5aPUY2dJIYBD0ud4xgOkp/zdOoLBCpdRMIMjzziI6PYATMWdw==}
     hasBin: true
 
   '@unocss/config@66.5.3':
@@ -4396,7 +4396,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.52.4':
     optional: true
 
-  '@so1ve/eslint-config@3.10.0(@typescript-eslint/eslint-plugin@8.46.1(@typescript-eslint/parser@8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))(jiti@2.6.1)(prettier@3.6.2)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
+  '@so1ve/eslint-config@3.10.0(@typescript-eslint/eslint-plugin@8.46.1(@typescript-eslint/parser@8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.37.0(jiti@2.6.1))(jiti@2.6.1)(prettier@3.6.2)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.5.0(eslint@9.37.0(jiti@2.6.1))
       '@html-eslint/eslint-plugin': 0.47.0(eslint@9.37.0(jiti@2.6.1))(jiti@2.6.1)
@@ -4407,7 +4407,7 @@ snapshots:
       '@typescript-eslint/parser': 8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
       '@typescript-eslint/utils': 8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
       '@unocss/eslint-config': 66.5.3(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
-      '@vitest/eslint-plugin': 1.3.19(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+      '@vitest/eslint-plugin': 1.3.19(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       astro-eslint-parser: 1.2.2
       eslint: 9.37.0(jiti@2.6.1)
       eslint-config-flat-gitignore: 2.1.0(eslint@9.37.0(jiti@2.6.1))
@@ -4492,11 +4492,11 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.3
 
-  '@sxzz/test-utils@0.5.11(esbuild@0.25.10)(rolldown@1.0.0-beta.43)(rollup@4.52.4)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
+  '@sxzz/test-utils@0.5.11(esbuild@0.25.10)(rolldown@1.0.0-beta.43)(rollup@4.52.4)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.1
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
     optionalDependencies:
       esbuild: 0.25.10
       rolldown: 1.0.0-beta.43
@@ -4535,7 +4535,7 @@ snapshots:
 
   '@types/concat-stream@2.0.3':
     dependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.8.0
 
   '@types/debug@4.1.12':
     dependencies:
@@ -4577,7 +4577,7 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.7.2':
+  '@types/node@24.8.0':
     dependencies:
       undici-types: 7.14.0
 
@@ -4709,36 +4709,36 @@ snapshots:
       '@typescript-eslint/types': 8.46.1
       eslint-visitor-keys: 4.2.1
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20251015.1':
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20251016.1':
     optional: true
 
-  '@typescript/native-preview@7.0.0-dev.20251015.1':
+  '@typescript/native-preview@7.0.0-dev.20251016.1':
     optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20251015.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20251015.1
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20251016.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20251016.1
 
   '@unocss/config@66.5.3':
     dependencies:
@@ -4832,14 +4832,14 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vitest/eslint-plugin@1.3.19(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
+  '@vitest/eslint-plugin@1.3.19(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       '@typescript-eslint/scope-manager': 8.46.1
       '@typescript-eslint/utils': 8.46.1(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.37.0(jiti@2.6.1)
     optionalDependencies:
       typescript: 5.9.3
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -4851,13 +4851,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
+  '@vitest/mocker@3.2.4(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.19
     optionalDependencies:
-      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -6013,7 +6013,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.8.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -6815,7 +6815,7 @@ snapshots:
 
   reusify@1.1.0: {}
 
-  rolldown-plugin-dts@0.15.10(@typescript/native-preview@7.0.0-dev.20251015.1)(oxc-resolver@11.9.0)(rolldown@1.0.0-beta.43)(typescript@5.9.3):
+  rolldown-plugin-dts@0.15.10(@typescript/native-preview@7.0.0-dev.20251016.1)(oxc-resolver@11.9.0)(rolldown@1.0.0-beta.43)(typescript@5.9.3):
     dependencies:
       '@babel/generator': 7.28.3
       '@babel/parser': 7.28.4
@@ -6827,7 +6827,7 @@ snapshots:
       get-tsconfig: 4.12.0
       rolldown: 1.0.0-beta.43
     optionalDependencies:
-      '@typescript/native-preview': 7.0.0-dev.20251015.1
+      '@typescript/native-preview': 7.0.0-dev.20251016.1
       typescript: 5.9.3
     transitivePeerDependencies:
       - oxc-resolver
@@ -7119,7 +7119,7 @@ snapshots:
       picomatch: 4.0.3
       typescript: 5.9.3
 
-  tsdown@0.14.2(@typescript/native-preview@7.0.0-dev.20251015.1)(oxc-resolver@11.9.0)(typescript@5.9.3):
+  tsdown@0.14.2(@typescript/native-preview@7.0.0-dev.20251016.1)(oxc-resolver@11.9.0)(typescript@5.9.3):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
@@ -7129,7 +7129,7 @@ snapshots:
       empathic: 2.0.0
       hookable: 5.5.3
       rolldown: 1.0.0-beta.43
-      rolldown-plugin-dts: 0.15.10(@typescript/native-preview@7.0.0-dev.20251015.1)(oxc-resolver@11.9.0)(rolldown@1.0.0-beta.43)(typescript@5.9.3)
+      rolldown-plugin-dts: 0.15.10(@typescript/native-preview@7.0.0-dev.20251016.1)(oxc-resolver@11.9.0)(rolldown@1.0.0-beta.43)(typescript@5.9.3)
       semver: 7.7.3
       tinyexec: 1.0.1
       tinyglobby: 0.2.15
@@ -7355,13 +7355,13 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-node@3.2.4(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
+  vite-node@3.2.4(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -7376,7 +7376,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite-plugin-solid@2.11.9(solid-js@1.9.9)(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)):
+  vite-plugin-solid@2.11.9(solid-js@1.9.9)(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)):
     dependencies:
       '@babel/core': 7.28.4
       '@types/babel__core': 7.20.5
@@ -7384,12 +7384,12 @@ snapshots:
       merge-anything: 5.1.7
       solid-js: 1.9.9
       solid-refresh: 0.6.3(solid-js@1.9.9)
-      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
-      vitefu: 1.1.1(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+      vite: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vitefu: 1.1.1(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
     transitivePeerDependencies:
       - supports-color
 
-  vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
+  vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.10
       fdir: 6.5.0(picomatch@4.0.3)
@@ -7398,21 +7398,21 @@ snapshots:
       rollup: 4.52.4
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 24.7.2
+      '@types/node': 24.8.0
       fsevents: 2.3.3
       jiti: 2.6.1
       terser: 5.44.0
       yaml: 2.8.1
 
-  vitefu@1.1.1(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)):
+  vitefu@1.1.1(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)):
     optionalDependencies:
-      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
 
-  vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
+  vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
+      '@vitest/mocker': 3.2.4(vite@7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -7430,12 +7430,12 @@ snapshots:
       tinyglobby: 0.2.15
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.1.10(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
-      vite-node: 3.2.4(@types/node@24.7.2)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite: 7.1.10(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
+      vite-node: 3.2.4(@types/node@24.8.0)(jiti@2.6.1)(terser@5.44.0)(yaml@2.8.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/debug': 4.1.12
-      '@types/node': 24.7.2
+      '@types/node': 24.8.0
     transitivePeerDependencies:
       - jiti
       - less

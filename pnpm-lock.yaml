@@ -70,8 +70,8 @@ importers:
         specifier: ^1.9.9
         version: 1.9.10
       tsdown:
-        specifier: ^0.14.2
-        version: 0.14.2(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(typescript@5.9.3)
+        specifier: ^0.15.0
+        version: 0.15.12(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.2
         version: 5.9.3
@@ -3042,15 +3042,18 @@ packages:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rolldown-plugin-dts@0.15.10:
-    resolution: {integrity: sha512-8cPVAVQUo9tYAoEpc3jFV9RxSil13hrRRg8cHC9gLXxRMNtWPc1LNMSDXzjyD+5Vny49sDZH77JlXp/vlc4I3g==}
+  rolldown-plugin-dts@0.17.3:
+    resolution: {integrity: sha512-8mGnNUVNrqEdTnrlcaDxs4sAZg0No6njO+FuhQd4L56nUbJO1tHxOoKDH3mmMJg7f/BhEj/1KjU5W9kZ9zM/kQ==}
     engines: {node: '>=20.18.0'}
     peerDependencies:
+      '@ts-macro/tsc': ^0.3.6
       '@typescript/native-preview': '>=7.0.0-dev.20250601.1'
-      rolldown: ^1.0.0-beta.9
+      rolldown: ^1.0.0-beta.44
       typescript: ^5.0.0
-      vue-tsc: ~3.0.3
+      vue-tsc: ~3.1.0
     peerDependenciesMeta:
+      '@ts-macro/tsc':
+        optional: true
       '@typescript/native-preview':
         optional: true
       typescript:
@@ -3324,8 +3327,8 @@ packages:
     peerDependencies:
       typescript: '>=4.0.0'
 
-  tsdown@0.14.2:
-    resolution: {integrity: sha512-6ThtxVZoTlR5YJov5rYvH8N1+/S/rD/pGfehdCLGznGgbxz+73EASV1tsIIZkLw2n+SXcERqHhcB/OkyxdKv3A==}
+  tsdown@0.15.12:
+    resolution: {integrity: sha512-c8VLlQm8/lFrOAg5VMVeN4NAbejZyVQkzd+ErjuaQgJFI/9MhR9ivr0H/CM7UlOF1+ELlF6YaI7sU/4itgGQ8w==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -3334,6 +3337,7 @@ packages:
       typescript: ^5.0.0
       unplugin-lightningcss: ^0.4.0
       unplugin-unused: ^0.5.0
+      unrun: ^0.2.1
     peerDependenciesMeta:
       '@arethetypeswrong/core':
         optional: true
@@ -3344,6 +3348,8 @@ packages:
       unplugin-lightningcss:
         optional: true
       unplugin-unused:
+        optional: true
+      unrun:
         optional: true
 
   tslib@1.14.1:
@@ -6820,7 +6826,7 @@ snapshots:
 
   reusify@1.1.0: {}
 
-  rolldown-plugin-dts@0.15.10(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(rolldown@1.0.0-beta.45)(typescript@5.9.3):
+  rolldown-plugin-dts@0.17.3(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(rolldown@1.0.0-beta.45)(typescript@5.9.3):
     dependencies:
       '@babel/generator': 7.28.5
       '@babel/parser': 7.28.5
@@ -6830,6 +6836,7 @@ snapshots:
       debug: 4.4.3
       dts-resolver: 2.1.2(oxc-resolver@11.11.1)
       get-tsconfig: 4.13.0
+      magic-string: 0.30.21
       rolldown: 1.0.0-beta.45
     optionalDependencies:
       '@typescript/native-preview': 7.0.0-dev.20251101.1
@@ -7123,7 +7130,7 @@ snapshots:
       picomatch: 4.0.3
       typescript: 5.9.3
 
-  tsdown@0.14.2(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(typescript@5.9.3):
+  tsdown@0.15.12(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(typescript@5.9.3):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
@@ -7133,7 +7140,7 @@ snapshots:
       empathic: 2.0.0
       hookable: 5.5.3
       rolldown: 1.0.0-beta.45
-      rolldown-plugin-dts: 0.15.10(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(rolldown@1.0.0-beta.45)(typescript@5.9.3)
+      rolldown-plugin-dts: 0.17.3(@typescript/native-preview@7.0.0-dev.20251101.1)(oxc-resolver@11.11.1)(rolldown@1.0.0-beta.45)(typescript@5.9.3)
       semver: 7.7.3
       tinyexec: 1.0.1
       tinyglobby: 0.2.15
@@ -7142,6 +7149,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
+      - '@ts-macro/tsc'
       - '@typescript/native-preview'
       - oxc-resolver
       - supports-color

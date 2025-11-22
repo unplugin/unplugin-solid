@@ -41,7 +41,7 @@ importers:
         version: 3.15.0(prettier@3.6.2)
       '@sxzz/test-utils':
         specifier: ^0.5.10
-        version: 0.5.12(esbuild@0.25.12)(rolldown@1.0.0-beta.51)(rollup@4.53.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.10.1)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))
+        version: 0.5.13(esbuild@0.25.12)(rolldown@1.0.0-beta.51)(rollup@4.53.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.10.1)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -1032,12 +1032,13 @@ packages:
     peerDependencies:
       eslint: '>=9.0.0'
 
-  '@sxzz/test-utils@0.5.12':
-    resolution: {integrity: sha512-ZK7ymielsamOU9CSJ9jkJdTgMbMmMceNfJO24FQTEbQJpYC5IBZMtSOC6/y6MbbprrxIB+ZZzQmuZFsGHSxFyg==}
+  '@sxzz/test-utils@0.5.13':
+    resolution: {integrity: sha512-QJNl1jUeZ/6a0+9yTbOH2nIvab2tHyWjZl3lteNz7vRae7VcdY/IaMezpSdx7iX2gBgsxBB5sU8b7o/3VUs8GQ==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       '@ts-macro/language-plugin': '*'
       '@volar/typescript': '*'
+      '@vue/language-core': ^3.1.0
       esbuild: '>=0.20.0'
       rolldown: '*'
       rollup: ^4.1.0
@@ -1047,6 +1048,8 @@ packages:
       '@ts-macro/language-plugin':
         optional: true
       '@volar/typescript':
+        optional: true
+      '@vue/language-core':
         optional: true
       esbuild:
         optional: true
@@ -4501,7 +4504,7 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.3
 
-  '@sxzz/test-utils@0.5.12(esbuild@0.25.12)(rolldown@1.0.0-beta.51)(rollup@4.53.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.10.1)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))':
+  '@sxzz/test-utils@0.5.13(esbuild@0.25.12)(rolldown@1.0.0-beta.51)(rollup@4.53.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.10.1)(jiti@2.6.1)(terser@5.44.1)(yaml@2.8.1))':
     dependencies:
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.1

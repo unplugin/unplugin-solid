@@ -87,7 +87,7 @@
 		"@types/node": "^24.3.0",
 		"@typescript/native-preview": "7.0.0-dev.20251125.1",
 		"bumpp": "^10.2.3",
-		"esbuild": "^0.25.9",
+		"esbuild": "^0.27.0",
 		"eslint": "^9.34.0",
 		"prettier": "^3.6.2",
 		"rollup": "^4.50.0",

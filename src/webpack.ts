@@ -10,6 +10,7 @@ import unplugin from ".";
  * Webpack plugin
  *
  * @example
+ *
  * ```js
  * // webpack.config.js
  * import Solid from 'unplugin-solid/webpack'
@@ -20,5 +21,6 @@ import unplugin from ".";
  * ```
  */
 const webpack: typeof unplugin.webpack = unplugin.webpack;
+
 export default webpack;
 export { webpack as "module.exports" };

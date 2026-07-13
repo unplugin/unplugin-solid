@@ -10,6 +10,7 @@ import unplugin from ".";
  * Rspack plugin
  *
  * @example
+ *
  * ```js
  * // rspack.config.js
  * import Solid from 'unplugin-solid/rspack'
@@ -20,5 +21,6 @@ import unplugin from ".";
  * ```
  */
 const rspack: typeof unplugin.rspack = unplugin.rspack;
+
 export default rspack;
 export { rspack as "module.exports" };

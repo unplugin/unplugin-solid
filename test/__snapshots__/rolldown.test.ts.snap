@@ -3,36 +3,27 @@
 exports[`rolldown > test/fixtures/basic.tsx > dev = false 1`] = `
 "// basic.js
 import { template } from "solid-js/web";
-
-//#region test/fixtures/basic.tsx
-var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
-const Foo = _tmpl$();
-var basic_default = Foo;
-
+const Foo = (/* @__PURE__ */ template(\`<div>Hello World\`))();
 //#endregion
-export { basic_default as default };"
+export { Foo as default };
+"
 `;
 
 exports[`rolldown > test/fixtures/basic.tsx > dev = true 1`] = `
 "// basic.js
 import { template } from "solid-js/web";
-
-//#region test/fixtures/basic.tsx
-var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
-const Foo = _tmpl$();
-var basic_default = Foo;
-
+const Foo = (/* @__PURE__ */ template(\`<div>Hello World\`))();
 //#endregion
-export { basic_default as default };"
+export { Foo as default };
+"
 `;
 
 exports[`rolldown > test/fixtures/syntax.tsx > dev = false 1`] = `
 "// syntax.js
 import { createComponent, delegateEvents, template } from "solid-js/web";
 import { Suspense, createEffect, createSignal, onCleanup, onMount } from "solid-js";
-
 //#region test/fixtures/syntax.tsx
-var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
 	onMount(() => {
@@ -59,20 +50,18 @@ function Foo(props) {
 		})()
 	];
 }
-var syntax_default = Foo;
 delegateEvents(["click"]);
-
 //#endregion
-export { syntax_default as default };"
+export { Foo as default };
+"
 `;
 
 exports[`rolldown > test/fixtures/syntax.tsx > dev = true 1`] = `
 "// syntax.js
 import { createComponent, delegateEvents, template } from "solid-js/web";
 import { Suspense, createEffect, createSignal, onCleanup, onMount } from "solid-js";
-
 //#region test/fixtures/syntax.tsx
-var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
 	onMount(() => {
@@ -99,9 +88,8 @@ function Foo(props) {
 		})()
 	];
 }
-var syntax_default = Foo;
 delegateEvents(["click"]);
-
 //#endregion
-export { syntax_default as default };"
+export { Foo as default };
+"
 `;

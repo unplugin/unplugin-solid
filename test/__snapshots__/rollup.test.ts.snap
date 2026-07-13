@@ -4,7 +4,7 @@ exports[`rollup > test/fixtures/basic.tsx > dev = false 1`] = `
 "// basic.js
 import { template } from 'solid-js/web';
 
-var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<div>Hello World\`);
 const Foo = _tmpl$();
 
 export { Foo as default };
@@ -15,7 +15,7 @@ exports[`rollup > test/fixtures/basic.tsx > dev = true 1`] = `
 "// basic.js
 import { template } from 'solid-js/web';
 
-var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<div>Hello World\`);
 const Foo = _tmpl$();
 
 export { Foo as default };
@@ -27,7 +27,7 @@ exports[`rollup > test/fixtures/syntax.tsx > dev = false 1`] = `
 import { template, createComponent, delegateEvents } from 'solid-js/web';
 import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
 
-var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
 	onMount(() => {
@@ -65,7 +65,7 @@ exports[`rollup > test/fixtures/syntax.tsx > dev = true 1`] = `
 import { template, createComponent, delegateEvents } from 'solid-js/web';
 import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
 
-var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
 	onMount(() => {

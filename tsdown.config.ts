@@ -2,10 +2,18 @@ import type { UserConfig } from "tsdown";
 import { defineConfig } from "tsdown";
 
 const config: UserConfig = defineConfig({
-  entry: ["./src/*.ts"],
+  entry: ["src/*.ts"],
+  dts: { oxc: true },
+  deps: {
+    onlyBundle: [],
+    neverBundle: ["vite"],
+  },
   exports: true,
-  shims: true,
-  external: ["vite"],
+  publint: "ci-only",
+  attw: {
+    enabled: "ci-only",
+    profile: "esm-only",
+  },
 });
 
 export default config;

@@ -4,7 +4,7 @@
  * @module
  */
 
-import unplugin from ".";
+import { unplugin } from ".";
 
 /**
  * Rolldown plugin

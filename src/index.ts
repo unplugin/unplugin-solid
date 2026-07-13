@@ -1,1 +1,2 @@
-export { plugin as default } from "./core";
+export { default, unplugin, unpluginFactory } from "./core";
+export type { Options } from "./core/types";

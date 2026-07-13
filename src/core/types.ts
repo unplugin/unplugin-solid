@@ -1,5 +1,7 @@
 import type { TransformOptions } from "@babel/core";
-import type { FilterPattern } from "@rollup/pluginutils";
+
+export type FilterPattern =
+  string | RegExp | readonly (string | RegExp)[] | null;
 
 interface ExtensionOptions {
   typescript?: boolean;

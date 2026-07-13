@@ -13,7 +13,6 @@ import type {
   UnpluginInstance,
 } from "unplugin";
 import { createUnplugin } from "unplugin";
-import { version } from "vite";
 import { crawlFrameworkPkgs } from "vitefu";
 
 import type { Options } from "./types";
@@ -62,6 +61,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
   let replaceDev = false;
   let projectRoot: string | undefined = process.cwd();
   let isTestMode = false;
+  let isVite6OrLater = false;
+  let isVite8OrLater = false;
+  let solidPkgsConfig:
+    Awaited<ReturnType<typeof crawlFrameworkPkgs>> | undefined;
 
   return {
     name: "unplugin-solid",
@@ -76,10 +79,15 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
         projectRoot = userConfig.root;
         isTestMode = userConfig.mode === "test";
 
+        const { version } = await import("vite");
+        const viteVersionMajor = Number(version.split(".")[0]);
+        isVite6OrLater = viteVersionMajor >= 6;
+        isVite8OrLater = viteVersionMajor >= 8;
+
         userConfig.resolve ??= {};
         userConfig.resolve.alias = normalizeAliases(userConfig.resolve?.alias);
 
-        const solidPkgsConfig = await crawlFrameworkPkgs({
+        solidPkgsConfig = await crawlFrameworkPkgs({
           viteUserConfig: userConfig,
           root: projectRoot ?? process.cwd(),
           isBuild: command === "build",
@@ -121,8 +129,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
           }
         }
 
-        const isViteGreaterThan6 = +version.split(".")[0] >= 6;
-
         return {
           /**
            * We only need esbuild on .ts or .js files. .tsx & .jsx files are
@@ -130,7 +136,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
            */
           // esbuild: { include: /\.ts$/ },
           resolve: {
-            conditions: isViteGreaterThan6
+            conditions: isVite6OrLater
               ? undefined
               : [
                   "solid",
@@ -147,8 +153,15 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
           optimizeDeps: {
             include: [...nestedDeps, ...solidPkgsConfig.optimizeDeps.include],
             exclude: solidPkgsConfig.optimizeDeps.exclude,
+            ...(isVite8OrLater
+              ? {
+                  rolldownOptions: {
+                    transform: { jsx: "preserve" as const },
+                  },
+                }
+              : {}),
           },
-          ssr: solidPkgsConfig.ssr,
+          ...(isVite6OrLater ? {} : { ssr: solidPkgsConfig.ssr }),
           ...(test.server ? { test } : {}),
         };
       },
@@ -169,9 +182,31 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
         config.resolve.conditions = [
           "solid",
           ...(replaceDev ? ["development"] : []),
-          ...(isTestMode && !opts.isSsrTargetWebworker ? ["browser"] : []),
+          ...(isTestMode && !opts.isSsrTargetWebworker && !options.ssr
+            ? ["browser"]
+            : []),
           ...config.resolve.conditions,
         ];
+
+        if (
+          isVite6OrLater &&
+          name === "ssr" &&
+          solidPkgsConfig &&
+          config.resolve.noExternal !== true
+        ) {
+          config.resolve.noExternal = [
+            ...(Array.isArray(config.resolve.noExternal)
+              ? config.resolve.noExternal
+              : []),
+            ...solidPkgsConfig.ssr.noExternal,
+          ];
+          config.resolve.external = [
+            ...(Array.isArray(config.resolve.external)
+              ? config.resolve.external
+              : []),
+            ...solidPkgsConfig.ssr.external,
+          ];
+        }
       },
 
       configResolved(config) {
@@ -207,11 +242,14 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
       filter: {
         id: { include, exclude },
       },
-      async handler(source, id) {
+      async handler(source, id, transformOptions?: { ssr?: boolean }) {
         if (id.includes("\0")) {
           return null;
         }
-        const isSsr = !!options.ssr;
+        const isSsr =
+          meta.framework === "vite"
+            ? Boolean(transformOptions?.ssr)
+            : Boolean(options.ssr);
         const currentFileExtension = getExtension(id);
 
         const extensionsToWatch = options.extensions ?? [];

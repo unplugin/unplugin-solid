@@ -3,7 +3,10 @@ import type { TransformOptions } from "@babel/core";
 export type FilterPattern =
   string | RegExp | readonly (string | RegExp)[] | null;
 
-interface ExtensionOptions {
+/**
+ * Possible options for the `extensions` property.
+ */
+export interface ExtensionOptions {
   typescript?: boolean;
 }
 

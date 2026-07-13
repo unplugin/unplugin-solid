@@ -10,7 +10,6 @@ import { mergeAndConcat } from "merge-anything";
 import solidRefresh from "solid-refresh/babel";
 import type { UnpluginInstance } from "unplugin";
 import { createUnplugin } from "unplugin";
-import { version } from "vite";
 import { crawlFrameworkPkgs } from "vitefu";
 
 import type { Options } from "./types";
@@ -103,6 +102,11 @@ export const plugin: UnpluginInstance<Options | undefined, false> =
 						}
 					}
 
+					const { version } = await import("vite").catch(() => {
+						throw new Error(
+							"[unplugin-solid] Failed to import 'vite'. Make sure 'vite' is installed.",
+						);
+					});
 					const isViteGreaterThan6 = +version.split(".")[0] >= 6;
 
 					return {

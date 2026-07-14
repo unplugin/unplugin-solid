@@ -54,8 +54,7 @@
     "build": "tsdown",
     "lint": "eslint . && prettier . --check",
     "lint:fix": "eslint . --fix && prettier . --write",
-    "prepublishOnly": "nr build",
-    "release": "bumpp --commit --push --tag && pnpm publish",
+    "release": "bumpp --commit --push --tag",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },

@@ -7,13 +7,3 @@ allowBuilds:
   unrs-resolver: true
 
 shellEmulator: true
-
-packageExtensions:
-  "@so1ve/eslint-config@4":
-    dependencies:
-      "@typescript-eslint/eslint-plugin": 8.64.0
-      "@typescript-eslint/parser": 8.64.0
-      "@typescript-eslint/rule-tester": 8.64.0
-      "@typescript-eslint/typescript-estree": 8.64.0
-      "@typescript-eslint/utils": 8.64.0
-      typescript: 6.0.3

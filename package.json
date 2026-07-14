@@ -1,6 +1,6 @@
 {
   "name": "unplugin-solid",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "packageManager": "pnpm@11.13.0",
   "author": "Ray <i@mk1.io> (@so1ve)",
   "type": "module",

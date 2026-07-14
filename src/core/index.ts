@@ -7,11 +7,7 @@ import { transformAsync } from "@babel/core";
 import solid from "babel-preset-solid";
 import { mergeAndConcat } from "merge-anything";
 import solidRefresh from "solid-refresh/babel";
-import type {
-  FilterPattern as UnpluginFilterPattern,
-  UnpluginFactory,
-  UnpluginInstance,
-} from "unplugin";
+import type { UnpluginFactory, UnpluginInstance } from "unplugin";
 import { createUnplugin } from "unplugin";
 import { crawlFrameworkPkgs } from "vitefu";
 
@@ -36,27 +32,10 @@ const SOLID_EXTERNALS = [
   "solid-js/h",
 ];
 
-function normalizeFilterPattern(
-  pattern: Options["include"],
-): UnpluginFilterPattern | undefined {
-  if (pattern == null) {
-    return undefined;
-  }
-
-  if (typeof pattern === "string" || pattern instanceof RegExp) {
-    return pattern;
-  }
-
-  return [...pattern];
-}
-
 export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
   options = {},
   meta,
 ) => {
-  const include = normalizeFilterPattern(options.include);
-  const exclude = normalizeFilterPattern(options.exclude);
-
   let needHmr = false;
   let replaceDev = false;
   let projectRoot: string | undefined = process.cwd();
@@ -240,7 +219,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined, false> = (
 
     transform: {
       filter: {
-        id: { include, exclude },
+        id: {
+          include: options.include,
+          exclude: options.exclude,
+        },
       },
       async handler(source, id, transformOptions?: { ssr?: boolean }) {
         if (id.includes("\0")) {

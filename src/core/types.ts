@@ -1,7 +1,5 @@
 import type { TransformOptions } from "@babel/core";
-
-export type FilterPattern =
-  string | RegExp | readonly (string | RegExp)[] | null;
+import type { FilterPattern } from "unplugin";
 
 /**
  * Possible options for the `extensions` property.

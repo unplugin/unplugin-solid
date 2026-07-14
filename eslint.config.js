@@ -7,24 +7,4 @@ export default so1ve({
       "vitest/no-standalone-expect": "off",
     },
   },
-}).override("so1ve/yaml/pnpm-workspace-yaml-sort", {
-  rules: {
-    "yaml/sort-keys": [
-      "error",
-      {
-        order: [
-          "gitChecks",
-          "ignoreWorkspaceRootCheck",
-          "allowBuilds",
-          "shellEmulator",
-          "packageExtensions",
-        ],
-        pathPattern: "^$",
-      },
-      {
-        order: { type: "asc" },
-        pathPattern: ".*",
-      },
-    ],
-  },
 });

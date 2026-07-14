@@ -1,10 +1,9 @@
 gitChecks: false
 ignoreWorkspaceRootCheck: true
 minimumReleaseAge: 0
+shellEmulator: true
 
 allowBuilds:
   esbuild: true
   oxc-resolver: true
   unrs-resolver: true
-
-shellEmulator: true

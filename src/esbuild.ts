@@ -4,19 +4,21 @@
  * @module
  */
 
-import unplugin from ".";
+import { unplugin } from ".";
 
 /**
  * Esbuild plugin
  *
  * @example
- * ```ts
- * import { build } from 'esbuild'
- * import Solid from 'unplugin-solid/esbuild'
  *
- * build({ plugins: [Solid()] })
- ```
+ * ```ts
+ * import { build } from "esbuild";
+ * import Solid from "unplugin-solid/esbuild";
+ *
+ * build({ plugins: [Solid()] });
+ * ```
  */
 const esbuild: typeof unplugin.esbuild = unplugin.esbuild;
+
 export default esbuild;
 export { esbuild as "module.exports" };

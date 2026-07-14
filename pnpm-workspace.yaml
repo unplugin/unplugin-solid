@@ -1,4 +1,10 @@
-onlyBuiltDependencies:
-  - esbuild
-  - oxc-resolver
-  - unrs-resolver
+gitChecks: false
+ignoreWorkspaceRootCheck: true
+minimumReleaseAge: 0
+
+allowBuilds:
+  esbuild: true
+  oxc-resolver: true
+  unrs-resolver: true
+
+shellEmulator: true

@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js";
+import type { JSX } from "@solidjs/web";
 
 const Foo: JSX.Element = <div>Hello World</div>;
 

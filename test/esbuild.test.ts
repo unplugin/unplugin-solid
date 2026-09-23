@@ -11,12 +11,13 @@ describe("esbuild", async () => {
       const result = await build({
         entryPoints: [id],
         bundle: true,
-        external: ["solid-js"],
+        external: ["solid-js", "@solidjs/web"],
         treeShaking: true,
         format: "esm",
         plugins: [
           Solid({
             dev: args.dev,
+            compiler: args.compiler,
           }),
         ],
         write: false,
@@ -30,7 +31,10 @@ describe("esbuild", async () => {
       ).toMatchSnapshot();
     },
     {
-      params: [["dev", [true, false]]],
+      params: [
+        ["dev", [true, false]],
+        ["compiler", ["native", "babel"]],
+      ],
       promise: true,
     },
   );

@@ -68,8 +68,8 @@
     "vitefu": "^1.0.4"
   },
   "devDependencies": {
-    "@so1ve/eslint-config": "^4.6.2",
-    "@so1ve/prettier-config": "^4.6.2",
+    "@so1ve/eslint-config": "^4.7.0",
+    "@so1ve/prettier-config": "^4.7.0",
     "@solidjs/vite-plugin": "^3.0.0-next.44",
     "@solidjs/web": "^2.0.0-rc.9",
     "@sxzz/test-utils": "^0.5.18",
@@ -77,8 +77,8 @@
     "@types/node": "^26.1.1",
     "bumpp": "^11.1.0",
     "esbuild": "^0.28.1",
-    "eslint": "^10.7.0",
-    "prettier": "^3.9.5",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
     "rollup": "^4.62.2",
     "solid-js": "^2.0.0-rc.9",
     "tsdown": "^0.22.7",

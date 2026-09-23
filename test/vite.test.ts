@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { build, createServer } from "vite";
+import { build, createServer, normalizePath } from "vite";
 import { describe, expect, it } from "vitest";
 import { defineConfig } from "vitest/config";
 
@@ -47,7 +47,9 @@ describe("Vite", () => {
   it.each(["server-only", "client-only"])(
     "enforces the %s boundary during builds",
     async (marker) => {
-      const entry = path.resolve(`test/fixtures/boundaries/${marker}.ts`);
+      const entry = normalizePath(
+        path.resolve(`test/fixtures/boundaries/${marker}.ts`),
+      );
       const runBuild = (ssr: boolean) =>
         build({
           configFile: false,

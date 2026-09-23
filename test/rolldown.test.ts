@@ -29,13 +29,7 @@ describe("rolldown", async () => {
     const outputOptions = result ?? inputOptions;
 
     expect(outputOptions.transform).toEqual({ jsx: "preserve" });
-    expect(outputOptions.external).toEqual([
-      "solid-js",
-      "solid-js/web",
-      "solid-js/store",
-      "solid-js/html",
-      "solid-js/h",
-    ]);
+    expect(outputOptions.external).toEqual(["solid-js", "@solidjs/web"]);
   });
 
   await testFixtures(
@@ -45,6 +39,7 @@ describe("rolldown", async () => {
         id,
         Solid({
           dev: args.dev,
+          compiler: args.compiler,
         }),
       );
 
@@ -54,7 +49,10 @@ describe("rolldown", async () => {
       );
     },
     {
-      params: [["dev", [true, false]]],
+      params: [
+        ["dev", [true, false]],
+        ["compiler", ["native", "babel"]],
+      ],
       promise: true,
     },
   );

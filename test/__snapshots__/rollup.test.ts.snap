@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`rollup > test/fixtures/basic.tsx > dev = false 1`] = `
+exports[`rollup > test/fixtures/basic.tsx > dev = false > compiler = babel 1`] = `
 "// basic.js
-import { template } from 'solid-js/web';
+import { template } from '@solidjs/web';
 
 var _tmpl$ = /*#__PURE__*/ template(\`<div>Hello World\`);
 const Foo = _tmpl$();
@@ -11,9 +11,20 @@ export { Foo as default };
 "
 `;
 
-exports[`rollup > test/fixtures/basic.tsx > dev = true 1`] = `
+exports[`rollup > test/fixtures/basic.tsx > dev = false > compiler = native 1`] = `
 "// basic.js
-import { template } from 'solid-js/web';
+import { template } from '@solidjs/web';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+const Foo = _tmpl$();
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/basic.tsx > dev = true > compiler = babel 1`] = `
+"// basic.js
+import { template } from '@solidjs/web';
 
 var _tmpl$ = /*#__PURE__*/ template(\`<div>Hello World\`);
 const Foo = _tmpl$();
@@ -22,26 +33,37 @@ export { Foo as default };
 "
 `;
 
-exports[`rollup > test/fixtures/syntax.tsx > dev = false 1`] = `
+exports[`rollup > test/fixtures/basic.tsx > dev = true > compiler = native 1`] = `
+"// basic.js
+import { template } from '@solidjs/web';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<div>Hello World\`);
+const Foo = _tmpl$();
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/syntax.tsx > dev = false > compiler = babel 1`] = `
 "// syntax.js
-import { template, createComponent, delegateEvents } from 'solid-js/web';
-import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
+import { template, createComponent, delegateEvents } from '@solidjs/web';
+import { createSignal, onSettled, onCleanup, createEffect, Loading } from 'solid-js';
 
 var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
-	onMount(() => {
+	onSettled(() => {
 		console.log("mounted");
 		onCleanup(() => {
 			console.log("unmounted");
 		});
 	});
-	createEffect(() => {
-		console.log("count:", count());
+	createEffect(count, (value) => {
+		console.log("count:", value);
 	});
 	return [
 		"Children:",
-		createComponent(Suspense, {
+		createComponent(Loading, {
 			fallback: "loading...",
 			get children() {
 				return props.children;
@@ -49,7 +71,7 @@ function Foo(props) {
 		}),
 		(() => {
 			var _el$ = _tmpl$();
-			_el$.$$click = () => setCount(count() + 1);
+			_el$._$$click = () => setCount(count() + 1);
 			return _el$;
 		})()
 	];
@@ -60,26 +82,26 @@ export { Foo as default };
 "
 `;
 
-exports[`rollup > test/fixtures/syntax.tsx > dev = true 1`] = `
+exports[`rollup > test/fixtures/syntax.tsx > dev = false > compiler = native 1`] = `
 "// syntax.js
-import { template, createComponent, delegateEvents } from 'solid-js/web';
-import { createSignal, onMount, onCleanup, createEffect, Suspense } from 'solid-js';
+import { template, createComponent, delegateEvents } from '@solidjs/web';
+import { createSignal, onSettled, onCleanup, createEffect, Loading } from 'solid-js';
 
-var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
+var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
 function Foo(props) {
 	const [count, setCount] = createSignal(0);
-	onMount(() => {
+	onSettled(() => {
 		console.log("mounted");
 		onCleanup(() => {
 			console.log("unmounted");
 		});
 	});
-	createEffect(() => {
-		console.log("count:", count());
+	createEffect(count, (value) => {
+		console.log("count:", value);
 	});
 	return [
 		"Children:",
-		createComponent(Suspense, {
+		createComponent(Loading, {
 			fallback: "loading...",
 			get children() {
 				return props.children;
@@ -87,7 +109,83 @@ function Foo(props) {
 		}),
 		(() => {
 			var _el$ = _tmpl$();
-			_el$.$$click = () => setCount(count() + 1);
+			_el$._$$click = () => setCount(count() + 1);
+			return _el$;
+		})()
+	];
+}
+delegateEvents(["click"]);
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/syntax.tsx > dev = true > compiler = babel 1`] = `
+"// syntax.js
+import { template, createComponent, delegateEvents } from '@solidjs/web';
+import { createSignal, onSettled, onCleanup, createEffect, Loading } from 'solid-js';
+
+var _tmpl$ = /*#__PURE__*/ template(\`<button>+\`);
+function Foo(props) {
+	const [count, setCount] = createSignal(0);
+	onSettled(() => {
+		console.log("mounted");
+		onCleanup(() => {
+			console.log("unmounted");
+		});
+	});
+	createEffect(count, (value) => {
+		console.log("count:", value);
+	});
+	return [
+		"Children:",
+		createComponent(Loading, {
+			fallback: "loading...",
+			get children() {
+				return props.children;
+			}
+		}, "Loading"),
+		(() => {
+			var _el$ = _tmpl$();
+			_el$._$$click = () => setCount(count() + 1);
+			return _el$;
+		})()
+	];
+}
+delegateEvents(["click"]);
+
+export { Foo as default };
+"
+`;
+
+exports[`rollup > test/fixtures/syntax.tsx > dev = true > compiler = native 1`] = `
+"// syntax.js
+import { template, createComponent, delegateEvents } from '@solidjs/web';
+import { createSignal, onSettled, onCleanup, createEffect, Loading } from 'solid-js';
+
+var _tmpl$ = /* @__PURE__ */ template(\`<button>+\`);
+function Foo(props) {
+	const [count, setCount] = createSignal(0);
+	onSettled(() => {
+		console.log("mounted");
+		onCleanup(() => {
+			console.log("unmounted");
+		});
+	});
+	createEffect(count, (value) => {
+		console.log("count:", value);
+	});
+	return [
+		"Children:",
+		createComponent(Loading, {
+			fallback: "loading...",
+			get children() {
+				return props.children;
+			}
+		}, "Loading"),
+		(() => {
+			var _el$ = _tmpl$();
+			_el$._$$click = () => setCount(count() + 1);
 			return _el$;
 		})()
 	];

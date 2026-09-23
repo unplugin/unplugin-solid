@@ -1,181 +1,69 @@
-import type { TransformOptions } from "@babel/core";
-import type { ConfigEnv, Plugin, UserConfig } from "vite";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import path from "node:path";
+
+import { build, createServer } from "vite";
+import { describe, expect, it } from "vitest";
+import { defineConfig } from "vitest/config";
 
 import Solid from "../src/vite";
 
-const { crawlFrameworkPkgs } = vi.hoisted(() => ({
-  crawlFrameworkPkgs: vi.fn(),
-}));
+// Adapted from solidjs/solid-vite-plugin at c94fcf351cb5e8392fc8c3d5085886b943dc2725 (MIT):
+// examples/start-ssr/src/{posture,server-posture}.test.tsx
+// examples/ssr/test/boundary.mjs
 
-vi.mock("vitefu", () => ({ crawlFrameworkPkgs }));
+describe("Vite", () => {
+  it.each([
+    ["jsdom", /template/, /getNextElement|ssrElement|ssr\(/],
+    ["node", /\bssr(?:Element)?\b/, /getNextElement|cloneNode/],
+  ] as const)(
+    "uses %s test compilation even when the application enables SSR",
+    async (environment, generated, excluded) => {
+      const server = await createServer({
+        configFile: false,
+        ...defineConfig({
+          mode: "test",
+          plugins: [Solid({ ssr: true })],
+          test: environment === "node" ? { environment } : undefined,
+        }),
+        server: { middlewareMode: true, watch: null, hmr: false },
+        optimizeDeps: { noDiscovery: true },
+      });
+      try {
+        const target = environment === "node" ? "ssr" : "client";
+        const result = await server.environments[target].transformRequest(
+          "/test/fixtures/basic.tsx",
+        );
+        const conditions = server.environments.ssr.config.resolve.conditions;
 
-const configEnv: ConfigEnv = {
-  command: "build",
-  mode: "production",
-  isPreview: false,
-  isSsrBuild: false,
-};
+        expect(conditions.includes("browser")).toBe(environment === "jsdom");
+        expect(server.config).toMatchObject({ test: { environment } });
+        expect(result?.code).toMatch(generated);
+        expect(result?.code).not.toMatch(excluded);
+      } finally {
+        await server.close();
+      }
+    },
+  );
 
-type HookHandler = (...args: unknown[]) => unknown;
+  it.each(["server-only", "client-only"])(
+    "enforces the %s boundary during builds",
+    async (marker) => {
+      const entry = path.resolve(`test/fixtures/boundaries/${marker}.ts`);
+      const runBuild = (ssr: boolean) =>
+        build({
+          configFile: false,
+          logLevel: "silent",
+          plugins: [Solid({ ssr: true })],
+          build: {
+            write: false,
+            ssr: ssr ? entry : false,
+            rolldownOptions: ssr ? {} : { input: entry },
+          },
+        });
 
-function getHookHandler(hook: unknown): HookHandler {
-  if (typeof hook === "function") {
-    return hook as HookHandler;
-  }
-
-  return (hook as { handler: HookHandler }).handler;
-}
-
-const runConfig = async (
-  plugin: Plugin,
-  userConfig: UserConfig = {},
-  env: ConfigEnv = configEnv,
-): Promise<UserConfig> =>
-  (await getHookHandler(plugin.config).call({}, userConfig, env)) as UserConfig;
-
-async function runConfigEnvironment(
-  plugin: Plugin,
-  name: string,
-  config: Record<string, unknown>,
-): Promise<void> {
-  await getHookHandler(plugin.configEnvironment).call({}, name, config, {
-    isSsrTargetWebworker: false,
-  });
-}
-
-const runTransform = async (
-  plugin: Plugin,
-  source: string,
-  id: string,
-  ssr: boolean,
-): Promise<{ code: string; map?: unknown } | null | undefined> =>
-  (await getHookHandler(plugin.transform).call({}, source, id, {
-    ssr,
-  })) as { code: string; map?: unknown } | null | undefined;
-
-describe("vite", () => {
-  beforeEach(() => {
-    crawlFrameworkPkgs.mockReset().mockResolvedValue({
-      optimizeDeps: {
-        include: ["vitefu-include"],
-        exclude: ["vitefu-exclude"],
-      },
-      ssr: {
-        noExternal: ["vitefu-no-external"],
-        external: ["vitefu-external"],
-      },
-    });
-  });
-
-  it("preserves JSX for Vite 8 dependency optimization without top-level SSR config", async () => {
-    const result = await runConfig(Solid());
-
-    expect(result.optimizeDeps).toMatchObject({
-      rolldownOptions: {
-        transform: {
-          jsx: "preserve",
-        },
-      },
-    });
-    expect(result).not.toHaveProperty("ssr");
-  });
-
-  it("merges vitefu SSR resolution into existing environment config", async () => {
-    const plugin = Solid();
-    await runConfig(plugin);
-    const environment = {
-      consumer: "server",
-      resolve: {
-        conditions: ["node"],
-        noExternal: ["existing-no-external"],
-        external: ["existing-external"],
-      },
-    };
-
-    await runConfigEnvironment(plugin, "ssr", environment);
-
-    expect(environment.resolve.noExternal).toEqual([
-      "existing-no-external",
-      "vitefu-no-external",
-    ]);
-    expect(environment.resolve.external).toEqual([
-      "existing-external",
-      "vitefu-external",
-    ]);
-  });
-
-  it("does not append SSR externals when noExternal is true", async () => {
-    const plugin = Solid();
-    await runConfig(plugin);
-    const environment = {
-      consumer: "server",
-      resolve: {
-        conditions: ["node"],
-        noExternal: true,
-        external: ["existing-external"],
-      },
-    };
-
-    await runConfigEnvironment(plugin, "ssr", environment);
-
-    expect(environment.resolve.noExternal).toBeTruthy();
-    expect(environment.resolve.external).toEqual(["existing-external"]);
-  });
-
-  it("does not add the browser condition in test mode when SSR is forced", async () => {
-    const plugin = Solid({ ssr: true });
-    await runConfig(plugin, { mode: "test" }, { ...configEnv, mode: "test" });
-    const environment = {
-      consumer: "client",
-      resolve: {
-        conditions: ["module"],
-      },
-    };
-
-    await runConfigEnvironment(plugin, "client", environment);
-
-    expect(environment.resolve.conditions).toContain("solid");
-    expect(environment.resolve.conditions).not.toContain("browser");
-  });
-
-  it("uses Vite's transform SSR flag for client and server output", async () => {
-    const ssrValues: boolean[] = [];
-    const babel = vi.fn(
-      (_source: string, _id: string, ssr: boolean): TransformOptions => {
-        ssrValues.push(ssr);
-
-        return {};
-      },
-    );
-    const plugin = Solid({ babel, ssr: true });
-    const source = "export default () => <main>Hello</main>";
-
-    const client = await runTransform(plugin, source, "/src/App.tsx", false);
-    const server = await runTransform(plugin, source, "/src/App.tsx", true);
-
-    expect(ssrValues).toEqual([false, true]);
-    expect(client?.code).not.toBe(server?.code);
-    expect(client?.code).toContain("template");
-    expect(server?.code).toContain("ssr");
-  });
-
-  it("skips files excluded by the transform filter", async () => {
-    const babel = vi.fn((): TransformOptions => ({}));
-    const plugin = Solid({
-      include: /\.tsx$/,
-      exclude: /excluded/,
-      babel,
-    });
-
-    const result = await runTransform(
-      plugin,
-      "export default () => <div />",
-      "/src/excluded.tsx",
-      false,
-    );
-
-    expect(result).toBeUndefined();
-    expect(babel).not.toHaveBeenCalled();
-  });
+      await expect(runBuild(marker === "server-only")).resolves.toBeDefined();
+      await expect(runBuild(marker !== "server-only")).rejects.toThrow(
+        `[unplugin-solid] Cannot import '${marker}' in a ${marker === "server-only" ? "client" : "server"} module: ${entry}`,
+      );
+    },
+  );
 });

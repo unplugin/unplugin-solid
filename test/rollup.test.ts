@@ -1,52 +1,31 @@
-import process from "node:process";
-
+import ViteSolid from "@solidjs/vite-plugin";
 import { rollupBuild, testFixtures } from "@sxzz/test-utils";
 import Oxc from "unplugin-oxc/rollup";
-import ViteSolid from "vite-plugin-solid";
+import { resolveConfig } from "vite";
 import { describe, expect } from "vitest";
 
 import Solid from "../src/rollup";
-import type { Options } from "../src/types";
 
 async function getCode(file: string, plugin: any) {
   const bundle = await rollupBuild(file, [plugin, Oxc()], {
-    external: ["solid-js"],
+    external: ["solid-js", "@solidjs/web"],
   });
 
   return bundle.snapshot;
-}
-
-function createPlugins(opt: Options & { root: string }) {
-  const vite = ViteSolid(opt);
-  // @ts-expect-error
-  vite.configResolved!({
-    root: opt.root,
-    command: "build",
-    dev: opt.dev,
-    build: {
-      sourcemap: false,
-    },
-    define: {},
-    logger: {},
-  } as any);
-
-  return {
-    unplugin: Solid(opt),
-    vite,
-  };
 }
 
 describe("rollup", async () => {
   await testFixtures(
     "test/fixtures/*.{js,ts,jsx,tsx}",
     async (args, id) => {
-      const { unplugin, vite } = createPlugins({
-        root: process.cwd(),
-        dev: args.dev,
-      });
-
+      const options = { dev: args.dev, compiler: args.compiler };
+      const config = await resolveConfig(
+        { configFile: false, plugins: [ViteSolid(options)] },
+        "build",
+      );
+      const vite = config.plugins.find((plugin) => plugin.name === "solid")!;
       const viteCode = await getCode(id, vite);
-      const unpluginCode = await getCode(id, unplugin);
+      const unpluginCode = await getCode(id, Solid(options));
 
       expect(viteCode).toBe(unpluginCode);
 
@@ -56,7 +35,10 @@ describe("rollup", async () => {
       );
     },
     {
-      params: [["dev", [true, false]]],
+      params: [
+        ["dev", [true, false]],
+        ["compiler", ["native", "babel"]],
+      ],
       promise: true,
     },
   );

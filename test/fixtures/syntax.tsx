@@ -1,16 +1,17 @@
-import type { JSX, ParentProps } from "solid-js";
+import type { JSX } from "@solidjs/web";
+import type { ParentProps } from "solid-js";
 import {
   createEffect,
   createSignal,
   onCleanup,
-  onMount,
-  Suspense,
+  onSettled,
+  Loading,
 } from "solid-js";
 
 function Foo(props: ParentProps): JSX.Element {
   const [count, setCount] = createSignal(0);
 
-  onMount(() => {
+  onSettled(() => {
     console.log("mounted");
 
     onCleanup(() => {
@@ -18,14 +19,14 @@ function Foo(props: ParentProps): JSX.Element {
     });
   });
 
-  createEffect(() => {
-    console.log("count:", count());
+  createEffect(count, (value) => {
+    console.log("count:", value);
   });
 
   return (
     <>
       Children:
-      <Suspense fallback="loading...">{props.children}</Suspense>
+      <Loading fallback="loading...">{props.children}</Loading>
       <button onClick={() => setCount(count() + 1)}>+</button>
     </>
   );
